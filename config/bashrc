@@ -122,10 +122,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Local ROS configuration.
 wlanros
 local-master
-source /opt/ros/$ROS_DISTRO/setup.bash
 # ros-dep-ws
+ros-progess-ws
 
 # Default Git config to personal.
 git-personal-config

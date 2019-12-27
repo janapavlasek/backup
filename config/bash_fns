@@ -1,12 +1,12 @@
 # FUNCTIONS
 
 ethros() {
-  IP=$(ifconfig eno2 | grep "inet addr:" | cut -d: -f2 | awk '{ print $1 }')
+  IP=$(ifconfig eno2 | grep "inet " | cut -d: -f2 | awk '{ print $2 }')
   export ROS_IP=$IP
 }
 
 wlanros() {
-  IP=$(ifconfig wlo1 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1 }')
+  IP=$(ip addr show wlo1 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
   export ROS_IP=$IP
 }
 
@@ -45,11 +45,23 @@ fetch() {
   source /home/$USER/progress/ros/devel/setup.bash
 }
 
+# Starts a virtual environment.
 startenv() {
   if [[ $# -eq 0 ]]
     then
-      echo "Provide the name of the virtual environment to activate."
+      echo "Usage:"
+      echo "        startenv ENV_NAME"
       return 1
   fi
   source /home/$USER/envs/$1/bin/activate
 }
+
+# Function to autocomplete startenv command.
+function _ls_envs()
+{
+    local cur
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=($( compgen -W "$(ls ~/envs/)" -- $cur ) )
+}
+complete -F _ls_envs startenv
