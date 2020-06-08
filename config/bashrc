@@ -98,10 +98,14 @@ alias l='ls -CF'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 
+# Useful variables.
 ROS_DISTRO=$(ls /opt/ros)
 if [ -f "/usr/local/cuda/version.txt" ]; then
     CUDA_VERSION=$(cat /usr/local/cuda/version.txt | grep -Po '[0-9]+\.[0-9]+')
 fi
+# TODO: Update these.
+ETH_DEVICE="eno0"
+WIFI_DEVICE="wlo1"
 
 # Alias definitions.
 if [ -f ~/.bash_aliases ]; then
@@ -128,7 +132,8 @@ fi
 wlanros
 local-master
 # ros-dep-ws
-ros-progess-ws
+# ros-progess-ws
+ros-global
 
 # Default Git config to personal.
 git-personal-config

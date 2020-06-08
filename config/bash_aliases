@@ -7,6 +7,7 @@ alias android="sh /usr/local/android-studio/bin/studio.sh"
 # WORKSPACES
 alias ros-dep-ws="source /home/$USER/dep_ws/devel/setup.bash"
 alias ros-progess-ws="source /home/$USER/progress/ros/devel/setup.bash"
+alias ros-global="source /opt/ros/$ROS_DISTRO/setup.bash"
 
 # ROS MASTERS
 alias local-master="export ROS_MASTER_URI=http://localhost:11311"

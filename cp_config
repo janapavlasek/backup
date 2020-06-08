@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INSTALL_DIR=/home/$USER/git/backup
+INSTALL_DIR=/home/$USER/code/backup
 
 backup_file() {
     if [ -f $1 ]; then

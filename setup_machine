@@ -55,7 +55,7 @@ git config --global user.name $NAME
 # Make some folders...
 mkdir_check /home/$USER/packages
 mkdir_check /home/$USER/progress
-mkdir_check /home/$USER/git
+mkdir_check /home/$USER/code
 
 # Clone into backup repo.
 if [ ! -d "/home/$USER/git/backup" ]; then
