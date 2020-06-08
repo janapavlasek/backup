@@ -99,7 +99,9 @@ alias l='ls -CF'
 #   sleep 10; alert
 
 ROS_DISTRO=$(ls /opt/ros)
-CUDA_VERSION=$(cat /usr/local/cuda/version.txt | grep -Po '[0-9]+\.[0-9]+')
+if [ -f "/usr/local/cuda/version.txt" ]; then
+    CUDA_VERSION=$(cat /usr/local/cuda/version.txt | grep -Po '[0-9]+\.[0-9]+')
+fi
 
 # Alias definitions.
 if [ -f ~/.bash_aliases ]; then
