@@ -99,13 +99,9 @@ alias l='ls -CF'
 #   sleep 10; alert
 
 # Useful variables.
-ROS_DISTRO=$(ls /opt/ros)
-if [ -f "/usr/local/cuda/version.txt" ]; then
-    CUDA_VERSION=$(cat /usr/local/cuda/version.txt | grep -Po '[0-9]+\.[0-9]+')
-fi
 # TODO: Update these.
 ETH_DEVICE="eno0"
-WIFI_DEVICE="wlo1"
+WIFI_DEVICE="wlp179s0"
 
 # Alias definitions.
 if [ -f ~/.bash_aliases ]; then
@@ -129,19 +125,22 @@ if ! shopt -oq posix; then
 fi
 
 # Local ROS configuration.
-wlanros
-local-master
-# ros-dep-ws
-# ros-progess-ws
-ros-global
+read-ros-distro
+if [[ ! -z "${ROS_DISTRO}" ]]; then
+    wlanros
+    local-master
+    # ros-dep-ws
+    # ros-progess-ws
+    ros-global
+fi
 
 # Default Git config to personal.
 git-personal-config
+# git-nvidia-config
 
 # CUDA
-PATH="$PATH:/usr/local/cuda-$CUDA_VERSION/bin"
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-$CUDA_VERSION/lib64/
-
-# OpenRave
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(openrave-config --python-dir)/openravepy/_openravepy_
-# export PYTHONPATH=$PYTHONPATH:$(openrave-config --python-dir)
+read-cuda-version
+if [[ ! -z "${CUDA_VERSION}" ]]; then
+    PATH="$PATH:/usr/local/cuda-$CUDA_VERSION/bin"
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-$CUDA_VERSION/lib64/
+fi
