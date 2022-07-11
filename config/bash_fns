@@ -45,6 +45,22 @@ fetch() {
   source /home/$USER/progress/ros/devel/setup.bash
 }
 
+# Reads CUDA version.
+read-cuda-version() {
+  if [ -f "/usr/local/cuda/version.txt" ]; then
+    CUDA_VERSION=$(cat /usr/local/cuda/version.txt | grep -Po '[0-9]+\.[0-9]+')
+  elif [ -f "/usr/local/cuda/version.json" ]; then
+    CUDA_VERSION=$(sed -n '/^\s*"cuda"\s*:\s*{/,${p;/^\s*}/q}' /usr/local/cuda/version.json | grep -Po '(?<="version" : ")[0-9]+\.[0-9]+')
+  fi
+}
+
+# Reads ROS distribution.
+read-ros-distro() {
+  if [ -d "/opt/ros" ]; then
+    ROS_DISTRO=$(ls /opt/ros)
+  fi
+}
+
 # Starts a virtual environment.
 startenv() {
   if [[ $# -eq 0 ]]
