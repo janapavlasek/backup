@@ -12,3 +12,4 @@ kdenlive
 simplescreenrecorder
 net-tools
 gparted
+texlive

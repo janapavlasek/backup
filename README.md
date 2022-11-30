@@ -38,6 +38,8 @@ make
 ./deviceQuery
 ```
 
+Also [install cuDNN](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-linux) runtime, developer tools and samples.
+
 ## Mounting External Harddrive
 
 Mount HDD partition:

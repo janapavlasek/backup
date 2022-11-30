@@ -1,3 +1,21 @@
+# VARIABLES
+
+# TODO: Update these.
+ETH_DEVICE="enp6s0"
+WIFI_DEVICE="wlp5s0"
+
+# Useful variables.
+if [ -d "/opt/ros" ]; then
+    ROS_DISTRO=$(ls /opt/ros)
+fi
+
+if [ -f "/usr/local/cuda/version.txt" ]; then
+    CUDA_VERSION=$(cat /usr/local/cuda/version.txt | grep -Po '[0-9]+\.[0-9]+')
+fi
+
+JULIA_VERSION=1.7.1
+JULIA_DIR=/home/$USER/packages/julia-$JULIA_VERSION
+
 # ALIASES
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -10,8 +28,8 @@ alias ros-progess-ws="source /home/$USER/progress/ros/devel/setup.bash"
 alias ros-global="source /opt/ros/$ROS_DISTRO/setup.bash"
 
 # ROS MASTERS
-alias local-master="export ROS_MASTER_URI=http://localhost:11311"
-alias auv-master="export ROS_MASTER_URI=http://192.168.0.102:11311"
+alias ros-local-master="export ROS_MASTER_URI=http://localhost:11311"
+alias ros-auv-master="export ROS_MASTER_URI=http://192.168.0.102:11311"
 
 # GIT CONFIGS
 alias git-umich-config="git config --global user.email 'pavlasek@umich.edu'"

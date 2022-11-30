@@ -127,8 +127,8 @@ fi
 # Local ROS configuration.
 read-ros-distro
 if [[ ! -z "${ROS_DISTRO}" ]]; then
-    wlanros
-    local-master
+    ros-wlan
+    ros-local-master
     # ros-dep-ws
     # ros-progess-ws
     ros-global
@@ -143,4 +143,23 @@ read-cuda-version
 if [[ ! -z "${CUDA_VERSION}" ]]; then
     PATH="$PATH:/usr/local/cuda-$CUDA_VERSION/bin"
     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-$CUDA_VERSION/lib64/
+fi
+
+# JULIA
+if [ -d $JULIA_DIR ]; then
+    PATH="$PATH:$JULIA_DIR/bin"
+fi
+
+# OpenRave
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(openrave-config --python-dir)/openravepy/_openravepy_
+# export PYTHONPATH=$PYTHONPATH:$(openrave-config --python-dir)
+
+# Go & Bazelisk
+if [ -d "/usr/local/go/bin" ]; then
+    export PATH=$PATH:/usr/local/go/bin
+    export PATH=$PATH:$(go env GOPATH)/bin
+fi
+
+if [ -d "/usr/share/vulkan" ]; then
+    export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
 fi

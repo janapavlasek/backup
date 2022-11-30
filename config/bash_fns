@@ -1,11 +1,11 @@
 # FUNCTIONS
 
-ethros() {
+ros-eth() {
   IP=$(ifconfig $ETH_DEVICE | grep "inet " | cut -d: -f2 | awk '{ print $2 }')
   export ROS_IP=$IP
 }
 
-wlanros() {
+ros-wlan() {
   IP=$(ip addr show $WIFI_DEVICE | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
   export ROS_IP=$IP
 }
@@ -16,7 +16,7 @@ husky2() {
   sudo ifconfig $ETH_DEVICE up
   sudo ip addr add 192.168.0.180/24 dev $ETH_DEVICE
   ~/ip_forwarding_husky.sh 192.168.0.180  192.168.0.22  $WIFI_DEVICE $ETH_DEVICE 192.168.0.0
-  ethros
+  ros-eth
 }
 
 husky1() {
@@ -25,12 +25,12 @@ husky1() {
   sudo ifconfig $ETH_DEVICE up
   sudo ip addr add 192.168.0.180/24 dev $ETH_DEVICE
   ~/ip_forwarding_husky.sh 192.168.0.180  192.168.0.12  $WIFI_DEVICE $ETH_DEVICE 192.168.0.0
-  ethros
+  ros-eth
 }
 
 auv() {
-  wlanros
-  auv_master
+  ros-wlan
+  ros-auv-master
   source /home/$USER/git/auv/catkin_ws/devel/setup.bash
 }
 
@@ -40,7 +40,7 @@ fetch() {
       echo "Provide the fetch number (7 or 18)."
       return 1
   fi
-  wlanros
+  ros-wlan
   export ROS_MASTER_URI="http://fetch$1:11311"
   source /home/$USER/progress/ros/devel/setup.bash
 }
